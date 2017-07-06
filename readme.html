@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WXNotifier</title>
+</head>
+<body>
+<h2>WXNotifier app description</h2>
+Written by Pavel (<a href="mailto:qa.pavel.m@gmail.com?Subject=Question%20about%20WXNotifier">qa.pavel.m@gmail.com</a>)
+<h3>Purpose of the app</h3>
+<div>This app is designed to send updates to a Slack channel about rainy weather, or severe weather conditions.</div>
+<h3>Settings</h3>
+<div>Since the app is using real time data, for presentational purposes I manually pick one of the recent rainy locations, so the app performs periodic postings. The app posts to the <i>#bring-an-umbrella</i> channel of the <a href="https://challengespace.slack.com/">challengespace</a> Slack space.
+</div>
+<h3>App in a nutshell</h3>
+<div>For presentational purposes, the app is sitting on my computer and is launched by <a href="https://en.wikipedia.org/wiki/Cron">Cron</a> automatically every 5 minutes. When that happens, the app retrieves the location from the <a href="settings.json">Configuration file</a>, and requests the recent reported weather conditions and forecast for that location from <a href="https://developer.yahoo.com/weather/">Yahoo! Weather API</a>. After that, the app checks if the obtained data is newer than what has been stored in the <a href="current_wx_string.txt">file</a>. If that's the case, it updates the data in the file, and then, if rainy weather is reported of forecast, it sends the message to the specified Slack channel. Also, if dangerous weather conditions (tornado, tropical storm, hurricane) are reported or forecast, it sends the message along with the notifications to all the subscribers of the channel.
+<br>&nbsp;<br>
+The app is written in Python 2.7, and can be launched by executing the <a href="slack_test.py">main file</a>. To install the app simply copy the whole directory to any machine having Python 2.7 installed; install the missing packages if needed (listed in lines 1-2 in the <a href="slack_test.py">main file</a>). 
+<br>&nbsp;<br>
+The code is commented and pretty much self-explanatory. Please don't hesitate to ask me if you have any questions.
+</div>
+<h3>Features</h3>
+<div>
+<li>Both the forecast and observation are checked:
+<br><img src="readme_files/s1.png">
+<br>&nbsp;<br>
+<li>The app will only post to Slack if newer information is obtained, and the weather remains rainy, or dangerous phenomena occur or persist.
+<br>&nbsp;<br>
+<div>
+<li>Messages about dangerous weather phenomena (tornado, tropical storm, hurricane) look different and trigger notifications:
+<br><img src="readme_files/s3.png">
+<br>&nbsp;<br><img src="readme_files/s2.png">
+<br>&nbsp;<br>
+<li>Dangerous weather phenomena have higher priority, e.g. if the forecast says "tornado", and the observation says "rain" (or vice versa), the "dangerous weather" scenario will be executed. 
+<br>&nbsp;<br>
+</div>
+<br>&nbsp;<br>
+<br>&nbsp;<br>
+<br>&nbsp;<br>
+<br>&nbsp;<br>
+<br>&nbsp;<br>
+<br>&nbsp;<br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
